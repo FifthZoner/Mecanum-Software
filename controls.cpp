@@ -79,10 +79,10 @@ void readBack(controllerData& controller){
 // moving
 void readLeftAnalog(controllerData& controller){
     if (controller.ps2x.Analog(PSS_LX) > limitUpper){
-        if (controller.ps2x.Analog(PSS_LY) > limitUpper){
+        if (controller.ps2x.Analog(PSS_LY) < limitLower){
             final+=(driveFrontRight(255));
         }
-        else if (controller.ps2x.Analog(PSS_LY) < limitLower){
+        else if (controller.ps2x.Analog(PSS_LY) > limitUpper){
             final+=(driveBackRight(255));
         }
         else{
@@ -90,10 +90,10 @@ void readLeftAnalog(controllerData& controller){
         }
     }
     else if (controller.ps2x.Analog(PSS_LX) < limitLower){
-        if (controller.ps2x.Analog(PSS_LY) > limitUpper){
+        if (controller.ps2x.Analog(PSS_LY) < limitLower){
             final+=(driveFrontLeft(255));
         }
-        else if (controller.ps2x.Analog(PSS_LY) < limitLower){
+        else if (controller.ps2x.Analog(PSS_LY) > limitUpper){
             final+=(driveBackLeft(255));
         }
         else{
@@ -101,10 +101,10 @@ void readLeftAnalog(controllerData& controller){
         }
     }
     else {
-        if (controller.ps2x.Analog(PSS_LY) > limitUpper){
+        if (controller.ps2x.Analog(PSS_LY) < limitLower){
             final+=(driveFront(255));
         }
-        else if (controller.ps2x.Analog(PSS_LY) < limitLower){
+        else if (controller.ps2x.Analog(PSS_LY) > limitUpper){
             final+=(driveBack(255));
         }
     }
@@ -124,15 +124,19 @@ void readRightAnalog(controllerData& controller){
 void readSequences(controllerData& controller){
     if(controller.ps2x.Button(PSB_GREEN)){
         triangleSequence();
+        controller.ps2x.read_gamepad(false, controller.vibrate);
     }
     if(controller.ps2x.Button(PSB_PINK)){
         squareSequence();
+        controller.ps2x.read_gamepad(false, controller.vibrate);
     }
     if(controller.ps2x.Button(PSB_RED)){
         circleSequence();
+        controller.ps2x.read_gamepad(false, controller.vibrate);
     }
     if(controller.ps2x.Button(PSB_BLUE)){
         crossSequence();
+        controller.ps2x.read_gamepad(false, controller.vibrate);
     }
 }
 

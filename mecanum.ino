@@ -36,6 +36,7 @@ void setup(void) {
   if (controller.error != 0){
     analogWrite(FRONT_RIGHT_FORWARD, 255);
     analogWrite(BACK_LEFT_FORWARD, 255);
+    //delay(10000);
   }
 }
 
